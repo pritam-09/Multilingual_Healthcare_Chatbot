@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Healthcare Chatbot</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .chat-box { border: 1px solid #ccc; padding: 10px; width: 400px; height: 400px; overflow-y: scroll; }
+        .input-box { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Multilingual Healthcare Chatbot</h2>
+    <div class="chat-box" id="chatBox"></div>
+    <div class="input-box">
+        <form id="chatForm">
+            <input type="text" id="userInput" placeholder="Type your query..." style="width: 300px;" required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById("chatBox");
+        const chatForm = document.getElementById("chatForm");
+        const userInput = document.getElementById("userInput");
+
+        chatForm.onsubmit = async function(e) {
+            e.preventDefault();
+            const message = userInput.value;
+            chatBox.innerHTML += "<p><strong>You:</strong> " + message + "</p>";
+            userInput.value = "";
+
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: "message=" + encodeURIComponent(message)
+            });
+
+            const data = await response.json();
+            chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.response + "</p>";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        };
+    </script>
+</body>
+</html>
