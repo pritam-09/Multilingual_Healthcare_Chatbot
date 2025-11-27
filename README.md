@@ -147,5 +147,5 @@ MIT License
 
 🔗 **GitHub Link**
 
-[https://github.com/yourusername/your-repo-name](https://github.com/yourusername/your-repo-name)
+[[https://github.com/yourusername/your-repo-name](https://github.com/yourusername/your-repo-name)](https://github.com/pritam-09/Multilingual_Healthcare_Chatbot.git)
 
